@@ -3,6 +3,7 @@ const util = require('util');
 const path = require('path');
 const chalk = require('chalk');
 const figures = require('figures');
+const readline = require('readline')
 const pkgConf = require('pkg-conf');
 const pkg = require('./package.json');
 const defaultTypes = require('./types');
@@ -245,9 +246,9 @@ class Signale {
 
   _write(stream, message) {
     if (this._interactive && isPreviousLogInteractive) {
-      stream.moveCursor(0, -1);
-      stream.clearLine();
-      stream.cursorTo(0);
+      readline.moveCursor(stream, 0, -1)
+      readline.clearLine(stream, 0)
+      readline.cursorTo(stream, 0)
     }
     stream.write(message + '\n');
     isPreviousLogInteractive = this._interactive;
